@@ -1,0 +1,5 @@
+﻿@model string
+<td>
+    <a class="btn btn-secondary" asp-action="Edit" asp-route-id="@Model">Edit</a>
+    <a class="btn btn-warning" asp-action="Delete" onclick="deleteCategory(@Model)" asp-route-id="@Model">Delete</a>
+</td>

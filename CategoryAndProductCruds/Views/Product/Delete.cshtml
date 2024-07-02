@@ -1,0 +1,62 @@
+﻿@model ProductVm
+@{
+    ViewData["Title"] = "Delete";
+
+
+}
+<div class="row">
+    <div class="col-md-4">
+        <form method="post" asp-controller="Product" asp-action="Delete" enctype="multipart/form-data">
+            <input asp-for="Product.Id" hidden />
+            <div class="form-group">
+                <label asp-for="Product.Name"></label>
+                <input type="text" disabled asp-for="Product.Name" class="form-control" />
+                <span asp-validation-for="Product.Name" class="text-danger"></span>
+            </div>
+
+
+            <div class="form-group">
+                <label asp-for="Product.ImageUrl"></label>
+                <input type="file" disabled name="file" id="imgfile" class="form-control" onchange="filimg(event);" />
+                <span asp-validation-for="Product.ImageUrl" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Product.CategoryId"></label>
+                <select disabled asp-for="Product.CategoryId" class="form-control" asp-items="Model.CategoryList">
+
+                    <option disabled selected>--Select Category</option>
+                </select>
+                <span asp-validation-for="Product.CategoryId" class="text-danger"></span>
+
+            </div>
+            <div class="form-group form-check">
+
+                <input disabled type="checkbox" asp-for="Product.Status" class="form-check-input" />
+                <label asp-for="Product.Status" class="form-check-label">Active</label>
+                <span asp-validation-for="Product.Status" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary">Delete</button>
+                <a asp-action="Index" asp-controller="Product" class="btn btn-warning">Back To Index</a>
+            </div>
+        </form>
+    </div>
+
+    <div class="col-md-4">
+        <div class="container">
+            <img id="imgpreview" src="~/@Model.Product.ImageUrl" width="300" height="300" />
+        </div>
+    </div>
+</div>
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <script>
+
+
+
+        var filimg = function (event) {
+            var imgholder = document.getElementById("imgpreview");
+            imgholder.src = URL.createObjectURL(event.target.files[0]);
+        }
+    </script>
+}
